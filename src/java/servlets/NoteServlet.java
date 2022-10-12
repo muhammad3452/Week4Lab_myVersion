@@ -25,7 +25,6 @@ public class NoteServlet extends HttpServlet {
       
         
         getServletContext().getRequestDispatcher("/WEB-INF/viewnote.jsp").forward(request, response);
-        request.setAttribute("edit", "/WEB-INF/editnote.jsp");
 
        
 
@@ -43,6 +42,13 @@ public class NoteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String editLink = request.getParameter("edit");
+        request.setAttribute("edit", editLink);
+        
+        if (editLink == null) {
+           getServletContext().getRequestDispatcher("/WEB-INF/editnote.jsp").forward(request, response);
+
+        }
     }
 
 }
